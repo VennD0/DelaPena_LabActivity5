@@ -41,14 +41,18 @@ public class SimpleCalcGUI extends JFrame {
     }
 
     public void answer() {
-        if(Objects.equals(cbOperations.getSelectedItem(), "+")){
-            lblResult.setText(String.valueOf(get_tfNumber1() + get_tfNumber2()));
-        }else if(Objects.equals(cbOperations.getSelectedItem(), "-")){
-            lblResult.setText(String.valueOf(get_tfNumber1() - get_tfNumber2()));
-        }else if(Objects.equals(cbOperations.getSelectedItem(), "*")){
-            lblResult.setText(String.valueOf(get_tfNumber1() * get_tfNumber2()));
-        }else if(Objects.equals(cbOperations.getSelectedItem(), "/")){
-            lblResult.setText(String.valueOf(get_tfNumber1() / get_tfNumber2()));
+        try {
+            if (Objects.equals(cbOperations.getSelectedItem(), "+")) {
+                lblResult.setText(String.valueOf(get_tfNumber1() + get_tfNumber2()));
+            } else if (Objects.equals(cbOperations.getSelectedItem(), "-")) {
+                lblResult.setText(String.valueOf(get_tfNumber1() - get_tfNumber2()));
+            } else if (Objects.equals(cbOperations.getSelectedItem(), "*")) {
+                lblResult.setText(String.valueOf(get_tfNumber1() * get_tfNumber2()));
+            } else if (Objects.equals(cbOperations.getSelectedItem(), "/")) {
+                lblResult.setText(String.valueOf(get_tfNumber1() / get_tfNumber2()));
+            }
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Input must be a number. Try again.");
         }
     }
 }
