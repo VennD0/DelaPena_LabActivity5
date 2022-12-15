@@ -32,7 +32,7 @@ public class LeapYearGUI extends JFrame{
         return Integer.parseInt(str);
     }
     public void is_LeapYear() {
-
+        try{
             int year = get_Year();
 
             if( year % 4 == 0){
@@ -42,5 +42,9 @@ public class LeapYearGUI extends JFrame{
                 JOptionPane.showMessageDialog(null, "Not a leap year");
                 tfYear.setText("");
             }
+        }catch(NumberFormatException exception){
+            JOptionPane.showMessageDialog(null, "Input must be a number. Try again.");
+            tfYear.setText("");
+        }
     }
 }
