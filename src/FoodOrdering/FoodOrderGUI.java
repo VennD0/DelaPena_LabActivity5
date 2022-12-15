@@ -46,34 +46,67 @@ public class FoodOrderGUI extends JFrame {
 
     public void total() {
         double total = 0;
+        boolean cflag = false;
+        boolean rbflag = false;
 
-        if(cPizza.isSelected()){
-            total += 100;
-        }
-        if(cBurger.isSelected()){
-            total += 80;
-        }
-        if(cFries.isSelected()){
-            total += 65;
-        }
-        if(cSoftDrinks.isSelected()){
-            total += 55;
-        }
-        if(cTea.isSelected()){
-            total += 50;
-        }
-        if(cSundae.isSelected()){
-            total += 40;
-        }
+        try {
+            if (cPizza.isSelected()) {
+                total += 100;
+                cflag = true;
+            }
+            if (cBurger.isSelected()) {
+                total += 80;
+                cflag = true;
+            }
+            if (cFries.isSelected()) {
+                total += 65;
+                cflag = true;
+            }
+            if (cSoftDrinks.isSelected()) {
+                total += 55;
+                cflag = true;
+            }
+            if (cTea.isSelected()) {
+                total += 50;
+                cflag = true;
+            }
+            if (cSundae.isSelected()) {
+                total += 40;
+                cflag = true;
+            }
 
-        if(rb5.isSelected()){
-            total -= (total*.05);
-        }else if(rb10.isSelected()){
-            total -= (total*.10);
-        }else if(rb15.isSelected()){
-            total -= (total*.15);
+            if (rb5.isSelected()) {
+                total -= (total * .05);
+                rbflag = true;
+            } else if (rb10.isSelected()) {
+                total -= (total * .10);
+                rbflag = true;
+            } else if (rb15.isSelected()) {
+                total -= (total * .15);
+                rbflag = true;
+            } else if(rbNone.isSelected()){
+                rbflag = true;
+            }
+            if(!cflag){
+                throw new InvalidCheckBoxException("Checkbox must have at least 1 box selected");
+            }else if(!rbflag){
+                throw new InvalidRadioButtonException("Radio Button must have at least 1 button selected");
+            }
+            JOptionPane.showMessageDialog(null, "Total Price is Php " + String.format("%.2f", total));
+        }catch(InvalidCheckBoxException | InvalidRadioButtonException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
+    }
+}
 
-        JOptionPane.showMessageDialog(null, "Total Price is Php " + String.format("%.2f", total));
+class InvalidCheckBoxException extends Exception{
+    public InvalidCheckBoxException(String e){
+        super(e);
+    }
+}
+
+class InvalidRadioButtonException extends Exception{
+    public InvalidRadioButtonException(String e){
+        super(e);
     }
 }
